@@ -12,7 +12,7 @@ def remove(dist, *args):
     newDist = dist
     for dist in args:
         for word in dist:
-            del newDist[word]
+            newDist[word] = 0
     return newDist
 
 if __name__ == '__main__':

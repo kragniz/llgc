@@ -1,0 +1,22 @@
+#!/usr/bin/env python
+import urllib2, base64
+
+class Search(object):
+    def __init__(self, username='hac1', password='sodcaysEnd'):
+        self.username = username
+        self.password = password
+
+    def search(self, *args, **kwargs):
+        query = '&'.join([str(keys) + '=' + str(items) for keys, items in kwargs.items()])
+        url = 'http://hacathon.llgc.org.uk/solr/select/?%s' % query
+
+        request = urllib2.Request(url)
+        base64string = base64.encodestring('%s:%s' % (self.username,
+                                                      self.password)).replace('\n', '')
+        request.add_header("Authorization", "Basic %s" % base64string)   
+        result = urllib2.urlopen(request)
+        return result.read()
+
+if __name__ == '__main__':
+    s = Search()
+    print s.search(q = 'ArticleTitle:Elephant', rows = 10)

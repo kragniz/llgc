@@ -52,7 +52,7 @@ for i, art in enumerate(articles):
 		for y in range(0, arts[i][item]):
 			dayDist.inc(item)
 
-print list(dayDist)[:200]
+print list(dayDist)[:100]
         
 
             
