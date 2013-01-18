@@ -2,6 +2,7 @@
 
 from llgc import Search
 from xml.etree import ElementTree
+from frequencies import count, remove
 
 s = Search()
 
@@ -22,6 +23,10 @@ articles = []
 
 for el in tree.iterfind('.//str[@name="ArticleText"]'):
 	articles.append(el.text)
+
+arts = {}
+for art, i in enumerate(articles):
+    arts[i] = count(art)
 
 tree = ElementTree.parse("wordlist.xml")
 commonWords = []
