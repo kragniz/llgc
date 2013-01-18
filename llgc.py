@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import urllib2, base64
+import xml.etree.ElementTree as ET
 
 class Search(object):
     def __init__(self, username='hac1', password='sodcaysEnd'):
@@ -17,6 +18,10 @@ class Search(object):
         result = urllib2.urlopen(request)
         return result.read()
 
+    def _parseResponse(self, xmlData):
+        tree = ET.fromstring(xmlData)
+        root = tree.getroot()
+
 if __name__ == '__main__':
     s = Search()
-    print s.search(q = 'ArticleTitle:Test', rows = 10)
+    print s._parseResponse(s.search(q = 'ArticleTitle:Test', rows = 10))
